@@ -3,11 +3,11 @@ name: "Synapse Login"
 description: "Log into Synapse"
 
 inputs:
-  synapse_username:
+  username:
     description: "Synapse username"
     required: true
 
-  synapse_password:
+  password:
     description: "Synapse password"
     required: true
 

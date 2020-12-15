@@ -10,7 +10,7 @@ on:
 jobs:
 
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
@@ -84,7 +84,12 @@ jobs:
 
   nlpsandbox:
     name: Submit submission to synapse
-
-    runs-on: ubuntu-latest
+    needs: [docker]
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+    - name: synapse login
+      uses: ./.github/actions/synapse-login
+      with:
+        username: ${{ secrets.SYNAPSE_USERNAME }}
+        password: ${{ secrets.SYNAPSE_PASSWORD }}

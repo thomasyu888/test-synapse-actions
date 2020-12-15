@@ -2,9 +2,9 @@ import os
 
 import synapseclient
 
-synapse_username = os.getenv("INPUT_SYNAPSE_USERNAME")
-synapse_apikey = os.getenv("INPUT_SYNAPSE_PASSWORD")
+username = os.getenv("INPUT_USERNAME")
+password = os.getenv("INPUT_PASSWORD")
 
-syn = synapseclient.login(username=synapse_username,
-                          apiKey=synapse_apikey,
+syn = synapseclient.login(username=username,
+                          password=password,
                           rememberMe=True)

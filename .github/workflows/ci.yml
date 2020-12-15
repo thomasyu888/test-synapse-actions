@@ -93,10 +93,24 @@ jobs:
       with:
         username: ${{ secrets.SYNAPSE_USERNAME }}
         password: ${{ secrets.SYNAPSE_PASSWORD }}
+    - name: Download docker tag
+      uses: actions/download-artifact@v2
+      with:
+        name: dockertag
+    - shell: bash
+      run: |
+        value=`cat dockertag.txt`
+        echo "DOCKERTAG=$value" >> $GITHUB_ENV
+    - name: synapse search docker
+      uses: ./.github/actions/synapse-search-docker
+      with:
+        parentid: syn4990358
+        docker_repo: ${{ env.DOCKERTAG }}
+      id: synsearchdocker
     - name: synapse get
       uses: ./.github/actions/synapse-get
       with:
-        synid: syn16816585
+        synid: ${{ steps.synsearchdocker.outputs.synid }}
       id: synget
     - shell: bash
       run: |

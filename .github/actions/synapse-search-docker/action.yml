@@ -1,0 +1,23 @@
+name: "Synapse search Docker"
+
+description: "Get Synapse id of Synapse Docker repository"
+
+inputs:
+
+  parentid:
+    description: "Synapse id"
+    required: true
+  
+  docker_repo:
+    description: "Name of docker repository + tag"
+    required: true
+
+outputs:
+  synid:
+    description: Synapse id of Docker repository
+  tag:
+    description: Tag of Synapse Docker repository
+
+runs:
+  using: "docker"
+  image: "Dockerfile"

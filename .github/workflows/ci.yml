@@ -98,3 +98,11 @@ jobs:
       with:
         synid: syn16816585
       id: synget
+    - shell: bash
+      run: |
+        echo ${{ steps.synget.outputs.path }} > path.txt
+    - name: Upload docker result
+      uses: actions/upload-artifact@v2
+      with:
+        name: path
+        path: path.txt

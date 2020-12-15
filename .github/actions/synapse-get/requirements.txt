@@ -1,1 +1,1 @@
-requests
+synapseclient

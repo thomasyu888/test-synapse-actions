@@ -1,0 +1,16 @@
+name: "Synapse get"
+
+description: "Get external data with GitHub Actions"
+
+inputs:
+  synid:
+    description: "Synapse id"
+    required: true
+
+outputs:
+  path:
+    description: Path to file
+
+runs:
+  using: "docker"
+  image: "Dockerfile"

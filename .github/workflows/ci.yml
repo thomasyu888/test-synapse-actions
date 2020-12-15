@@ -93,3 +93,8 @@ jobs:
       with:
         username: ${{ secrets.SYNAPSE_USERNAME }}
         password: ${{ secrets.SYNAPSE_PASSWORD }}
+    - name: synapse get
+      uses: ./.github/actions/synapse-get
+      with:
+        synid: syn16816585
+      id: synget

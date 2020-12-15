@@ -73,4 +73,18 @@ jobs:
           org.opencontainers.image.version=${{ steps.prep.outputs.version }}
           org.opencontainers.image.revision=${{ github.sha }}
           org.opencontainers.image.licenses=${{ github.event.repository.license.name }}
+    - shell: bash
+      run: |
+        echo ${{ steps.prep.outputs.tags }} > dockertag.txt
+    - name: Upload math result for job 1
+      uses: actions/upload-artifact@v2
+      with:
+        name: dockertag
+        path: dockertag.txt
 
+  nlpsandbox:
+    name: Submit submission to synapse
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2

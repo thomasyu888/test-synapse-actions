@@ -107,16 +107,25 @@ jobs:
         parentid: syn4990358
         docker_repo: ${{ env.DOCKERTAG }}
       id: synsearchdocker
-    - name: synapse get
-      uses: ./.github/actions/synapse-get
+    - name: synapse submit
+      uses: ./.github/actions/synapse-submit
       with:
         synid: ${{ steps.synsearchdocker.outputs.synid }}
-      id: synget
+        # Address queue: 9614658
+        # Address test queue: 9614684
+        # Date queue: 9614652
+        # Date test queue: 9614654
+        # Person queue: 9614657
+        # Person test queue: 9614685
+        # Test Queue: 9614111
+        evaluationid: 9614111
+        dockertag: ${{ steps.synsearchdocker.outputs.tag }}
+      id: synsubmit
     - shell: bash
       run: |
-        echo ${{ steps.synget.outputs.path }} > path.txt
+        echo ${{ steps.synsubmit.outputs.submissionid }} > submission.txt
     - name: Upload docker result
       uses: actions/upload-artifact@v2
       with:
-        name: path
-        path: path.txt
+        name: submission
+        path: submission.txt

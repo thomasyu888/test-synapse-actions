@@ -1,0 +1,29 @@
+name: "Synapse Submission"
+
+description: "Submit to Synapse Queue"
+
+inputs:
+
+  evaluationid:
+    description: "Synapse Evaluation queue id"
+    required: true
+  
+  synid:
+    description: "Synapse id of submission"
+    required: true
+  
+  teamid:
+    description: "Synapse Team id"
+    required: false
+
+  dockertag:
+    description: "Docker tag"
+    required: false
+
+outputs:
+  submissionid:
+    description: Submisison id
+
+runs:
+  using: "docker"
+  image: "Dockerfile"

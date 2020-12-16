@@ -88,11 +88,14 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+    # log into Synapse
     - name: synapse login
       uses: ./.github/actions/synapse-login
       with:
         username: ${{ secrets.SYNAPSE_USERNAME }}
         password: ${{ secrets.SYNAPSE_PASSWORD }}
+    # Read dockertag value from docker run
+    # (Env variables aren't shared between runs)
     - name: Download docker tag
       uses: actions/download-artifact@v2
       with:
@@ -101,12 +104,18 @@ jobs:
       run: |
         value=`cat dockertag.txt`
         echo "DOCKERTAG=$value" >> $GITHUB_ENV
+    # search for docker repo in Synaspe project
     - name: synapse search docker
       uses: ./.github/actions/synapse-search-docker
       with:
         parentid: syn4990358
         docker_repo: ${{ env.DOCKERTAG }}
       id: synsearchdocker
+    # Store README + Dockerfile
+    - name: synapse store readme
+      uses: ./.github/actions/synapse-gh-to-wiki
+      with:
+        synid: ${{ steps.synsearchdocker.outputs.synid }}
     - name: synapse submit
       uses: ./.github/actions/synapse-submit
       with:

@@ -90,7 +90,7 @@ jobs:
     - uses: actions/checkout@v2
     # log into Synapse
     - name: synapse login
-      uses: ./.github/actions/synapse-login
+      uses: thomasyu888/synapse-login-action@0.1
       with:
         username: ${{ secrets.SYNAPSE_USERNAME }}
         password: ${{ secrets.SYNAPSE_PASSWORD }}
